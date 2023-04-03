@@ -95,7 +95,7 @@ const updateTotal = total => {
 };
 
 const updateLoadButton = (currentPage, finalPage) => {
-  const btn = document.querySelector('.load-more hidden');
+  const btn = document.querySelector('.load-more');
   btn.style.display = 'block';
   btn.dataset.page = Number(currentPage) + 1;
   btn.dataset.final = finalPage;
