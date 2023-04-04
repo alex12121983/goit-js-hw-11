@@ -1,8 +1,8 @@
 class Images {
-  constructor(url, link, alt, likes, views, comments, downloads) {
+  constructor(url, link, tags, likes, views, comments, downloads) {
     this.url = url;
     this.link = link;
-    this.alt = alt;
+    this.tags = tags;
     this.likes = likes;
     this.views = views;
     this.comments = comments;
@@ -11,8 +11,6 @@ class Images {
 }
 
 const createCollection = collection => {
-  // const collection = hits.slice(0, count);
-  // console.log(collection);
   return collection.map(
     ({
       webformatURL,
@@ -58,28 +56,8 @@ const renderImages = collection => {
             </div>`;
     })
     .join('');
-  //   const li = document.createElement('li');
-  //   li.classList.add('news-item');
 
-  //   const title = document.createElement('h2');
-  //   title.classList.add('news-title');
-  //   title.textContent = article.title;
-  //   li.append(title);
-
-  //   const desc = document.createElement('p');
-  //   desc.classList.add('news-content');
-  //   desc.textContent = article.description;
-  //   li.append(desc);
-
-  //   const date = document.createElement('span');
-  //   date.classList.add('news-date');
-  //   date.textContent = article.publishedAt;
-  //   li.append(date);
-
-  //   return li;
-  // });
   gallery.insertAdjacentHTML('beforeend', images);
-  // newsContainer.append(...news);
 };
 
 const updateTotal = total => {
@@ -91,14 +69,21 @@ const updateTotal = total => {
     container.append(el);
   }
 
-  el.textContent = `Total articles: ${total}`;
+  el.textContent = `Total images: ${total}`;
 };
 
 const updateLoadButton = (currentPage, finalPage) => {
   const btn = document.querySelector('.load-more');
   btn.style.display = 'block';
+  // btn.classList.remove('hidden');
   btn.dataset.page = Number(currentPage) + 1;
   btn.dataset.final = finalPage;
+};
+
+const hideLoadButton = evt => {
+  const btn = document.querySelector('.load-more');
+  // btn.classList.add('hidden');
+  btn.style.display = 'none';
 };
 
 const clearImages = () => {
@@ -111,5 +96,6 @@ export {
   renderImages,
   updateTotal,
   updateLoadButton,
+  hideLoadButton,
   clearImages,
 };
