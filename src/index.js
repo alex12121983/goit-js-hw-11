@@ -4,6 +4,7 @@ import {
   renderImages,
   createCollection,
   updateTotal,
+  deleteTotal,
   updateLoadButton,
   hideLoadButton,
   clearImages,
@@ -26,6 +27,7 @@ const fetchImages = (search, page) =>
         Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
+        deleteTotal();
         return;
       }
       Notiflix.Notify.success(`Hooray! We found ${response.totalHits} images.`);
@@ -49,17 +51,15 @@ refs.button.addEventListener('click', evt => {
 });
 
 refs.loadMoreBtn.addEventListener('click', evt => {
-  const page = refs.loadMoreBtn.dataset.page; //2
-  const final = refs.loadMoreBtn.dataset.final; //2
-
-  if (final >= page) {
+  const page = refs.loadMoreBtn.dataset.page;
+  const final = refs.loadMoreBtn.dataset.final;
+  if (Number(final) >= Number(page)) {
     const search = refs.input.value;
     fetchImages(search, page);
+  } else {
+    Notiflix.Notify.failure(
+      "We're sorry, but you've reached the end of search results."
+    );
+    hideLoadButton();
   }
-
-  Notiflix.Notify.failure(
-    "We're sorry, but you've reached the end of search results."
-  );
-
-  hideLoadButton();
 });

@@ -72,6 +72,13 @@ const updateTotal = total => {
   el.textContent = `Total images: ${total}`;
 };
 
+const deleteTotal = () => {
+  let el = document.querySelector('.total');
+  if (el) {
+    el.remove();
+  }
+};
+
 const updateLoadButton = (currentPage, finalPage) => {
   const btn = document.querySelector('.load-more');
   btn.style.display = 'block';
@@ -95,6 +102,7 @@ export {
   createCollection,
   renderImages,
   updateTotal,
+  deleteTotal,
   updateLoadButton,
   hideLoadButton,
   clearImages,
